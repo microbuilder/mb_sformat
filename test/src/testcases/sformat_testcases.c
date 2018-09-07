@@ -37,6 +37,7 @@ TEST_CASE(test1)
     struct sf_hex_tbl_fmt fmt;
     uint8_t test_data[256];
 
+    memset(&fmt, 0, sizeof fmt);
     fmt.show_ascii = true;
     fmt.show_addr = true;
     fmt.start_addr = 0x20004000;
@@ -47,7 +48,8 @@ TEST_CASE(test1)
     };
 
     /* Render the first 64 bytes of flash memory. */
-    sf_hex_tabulate_16(&fmt, &test_data[48], 64);
+    sf_hex_tabulate_16(&fmt, &test_data[48], 80);
 
+    /* Intentionally fail to see results for now. */
     TEST_ASSERT(f_is_equal(1.0f, 1.1f, 1E-5F));
 }

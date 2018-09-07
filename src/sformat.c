@@ -58,11 +58,15 @@ sf_hex_tabulate_16(struct sf_hex_tbl_fmt *fmt, unsigned char *data,
     }
 
     /* Insert offset padding for first row if necessary. */
-    cur_pos = fmt->start_addr % 16;
-    if (cur_pos != 0) {
-        for(idx = 0; idx < cur_pos; idx++) {
-            printf("   ");
-        }
+    if (fmt->show_addr) {
+      cur_pos = fmt->start_addr % 16;
+      if (cur_pos != 0) {
+          for(idx = 0; idx < cur_pos; idx++) {
+              printf("   ");
+          }
+      }
+    } else {
+      cur_pos = 0;
     }
 
     /* Print data row by row. */
