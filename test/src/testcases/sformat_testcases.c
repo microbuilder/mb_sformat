@@ -135,7 +135,9 @@ TEST_CASE(test_bytes_tbl_asc)
 
 TEST_CASE(test_mbuf_tbl_hex)
 {
-    struct os_mbuf *m;
+    struct os_mbuf *m1;
+    struct os_mbuf *m2;
+    struct os_mbuf *m3;
     struct sf_tbl_cfg cfg;
     int rc;
 
@@ -147,18 +149,34 @@ TEST_CASE(test_mbuf_tbl_hex)
     cfg.show_addr = true;
     cfg.start_addr = 0x20004030;
 
-    m = os_mbuf_get(&sf_mbuf_pool, 0);
-    TEST_ASSERT_FATAL(m != NULL, "Error allocating mbuf");
+    /* Populate mbuf 1. */
+    m1 = os_mbuf_get(&sf_mbuf_pool, 0);
+    TEST_ASSERT_FATAL(m1 != NULL, "Error allocating mbuf 1");
+    rc = os_mbuf_append(m1, sf_mbuf_test_data+48, 128);
+    TEST_ASSERT_FATAL(rc == 0, "Cannot add %d bytes to mbuf 1", 128);
 
-    /* Append 128 bytes of test data. */
-    rc = os_mbuf_append(m, sf_mbuf_test_data+0x30, 128);
-    TEST_ASSERT_FATAL(rc == 0, "Cannot add %d bytes to mbuf", 128);
+    /* Populate mbuf 2. */
+    m2 = os_mbuf_get(&sf_mbuf_pool, 0);
+    TEST_ASSERT_FATAL(m2 != NULL, "Error allocating mbuf 2");
+    rc = os_mbuf_append(m2, sf_mbuf_test_data+48+128, 16);
+    TEST_ASSERT_FATAL(rc == 0, "Cannot add %d bytes to mbuf 2", 16);
 
-    /* Render the mbuf data in tabular format. */
-    sf_mbuf_tbl_16(&cfg, m);
+    /* Populate mbuf 3. */
+    m3 = os_mbuf_get(&sf_mbuf_pool, 0);
+    TEST_ASSERT_FATAL(m3 != NULL, "Error allocating mbuf 3");
+    rc = os_mbuf_append(m3, sf_mbuf_test_data+48+128+16, 32);
+    TEST_ASSERT_FATAL(rc == 0, "Cannot add %d bytes to mbuf 3", 32);
 
-    rc = os_mbuf_free(m);
-    TEST_ASSERT_FATAL(rc == 0, "Error free'ing mbuf %d", rc);
+    /* Concat m3 -> m2 -> m1 to form a chain. */
+    os_mbuf_concat(m2, m3);
+    os_mbuf_concat(m1, m2);
+
+    /* Render the mbuf pool in tabular format. */
+    sf_mbuf_tbl_16(&cfg, m1);
+
+    /* Free the mbufs. */
+    rc = os_mbuf_free_chain(m1);
+    TEST_ASSERT_FATAL(rc == 0, "Error free'ing mbuf chain %d", rc);
 
     /* Intentionally fail to see results for now. */
     TEST_ASSERT(f_is_equal(1.0f, 1.1f, 1E-5F));

@@ -99,9 +99,9 @@ void sf_bytes_tbl_16(struct sf_tbl_cfg *cfg, unsigned char *data,
  *
  * @param cfg   Pointer to the sf_tbl_cfg struct indicating which optional
  *              features should be enabled when rendering the table.
- * @param m     Pointer to the mbuf chain to render.
+ * @param m     Pointer to the first mbuf in the mbuf chain to render.
  */
-void sf_mbuf_tbl_16(struct sf_tbl_cfg *cfg, struct os_mbuf *m);
+void sf_mbuf_tbl_16(struct sf_tbl_cfg *cfg, struct os_mbuf *om);
 
 /** @} */ /* End of FUNC group */
 

@@ -170,7 +170,16 @@ sf_bytes_tbl_16(struct sf_tbl_cfg *cfg, unsigned char *data, unsigned int len)
     }
 }
 
-void sf_mbuf_tbl_16(struct sf_tbl_cfg *cfg, struct os_mbuf *m)
+void sf_mbuf_tbl_16(struct sf_tbl_cfg *cfg, struct os_mbuf *om)
 {
-    sf_bytes_tbl_16(cfg, OS_MBUF_DATA(m, uint8_t *), m->om_len);
+    const struct os_mbuf *cur;
+    unsigned int count;
+
+    for (cur = om; cur != NULL; cur = SLIST_NEXT(cur, om_next)) {
+        printf("os_mbuf record #%u [len=%u]:\n\n", count++, cur->om_len);
+        sf_bytes_tbl_16(cfg, OS_MBUF_DATA(om, uint8_t *), cur->om_len);
+        printf("\n");
+        /* Offset the starting address an appropriate number of bytes. */
+        cfg->start_addr += cur->om_len;
+    }
 }
