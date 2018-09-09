@@ -26,17 +26,46 @@
 extern "C" {
 #endif
 
-struct sf_hex_tbl_fmt {
-    /** Whether or not to render ASCII equivalents. */
+/** Indicates the display format used when rendering 8-bit data. */
+enum sf_bytes_tbl_rndr {
+    /** Render values in hexadecimal format (default). */
+    SF_BYTES_TBL_RNDR_HEX = 0,
+
+    /** Render values in unsigned decimal format. */
+    SF_BYTES_TBL_RNDR_DEC = 1,
+
+    /** Render values in ASCII format ('.' if value is out of range). */
+    SF_BYTES_TBL_RNDR_ASC = 2
+};
+
+/** Configurable rendering options for 8-bit tabular data. */
+struct sf_bytes_tbl_fmt {
+    /** Indicates how the data should be rendered. */
+    enum sf_bytes_tbl_rndr render_as;
+
+    /** Whether or not to render ASCII equivalents in a right-hand column. */
     bool show_ascii;
-    /** Whether or not to add address labels to the output. */
+
+    /** Whether or not address labels should be added to the output. */
     bool show_addr;
-    /** The starting value for the address labels. */
+
+    /**
+     * The starting value for the address labels, which will be correlated
+     * with the first byte in the provided payload.
+     */
     unsigned int start_addr;
 } __attribute__((packed));
 
-
-void sf_hex_tabulate_16(struct sf_hex_tbl_fmt *fmt, unsigned char *data,
+/**
+ * Renders 8-bit values in a 16 column wide table, with optional address
+ * labels and ASCII text equivalents.
+ *
+ * @param Pointer to the sf_hex_tbl_fmt struct indicating which optional
+ *        features should be enabled when rendering the table.
+ * @param Pointer to the data to render.
+ * @param Number of bytes to render.
+ */
+void sf_bytes_tbl_16(struct sf_bytes_tbl_fmt *fmt, unsigned char *data,
     unsigned int len);
 
 #ifdef __cplusplus

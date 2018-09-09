@@ -20,8 +20,17 @@
 #include <ctype.h>
 #include "sformat/sformat.h"
 
+/**
+ * Renders the ASCII equivalents for a row of values, with non-printable
+ * characters represented by the char assigned to the 'ninvis' parameter.
+ *
+ * @param Pointer to the array of data to render as ASCII values.
+ * @param The number of characters to attempt to render.
+ * @param The single character to use to represent non-printable characters
+ *        outside of the standard ASCII range.
+ */
 static void
-sf_hex_render_ascii(unsigned char *data, unsigned int len, unsigned char nonvis)
+sf_bytes_rndr_ascii(unsigned char *data, unsigned int len, unsigned char nonvis)
 {
     unsigned int idx;
 
@@ -35,7 +44,7 @@ sf_hex_render_ascii(unsigned char *data, unsigned int len, unsigned char nonvis)
 }
 
 void
-sf_hex_tabulate_16(struct sf_hex_tbl_fmt *fmt, unsigned char *data,
+sf_bytes_tbl_16(struct sf_bytes_tbl_fmt *fmt, unsigned char *data,
     unsigned int len)
 {
     unsigned int idx;
@@ -53,7 +62,25 @@ sf_hex_tabulate_16(struct sf_hex_tbl_fmt *fmt, unsigned char *data,
     /* Check if we need to render the top address bar. */
     if (fmt->show_addr) {
         /* Render the top address bar. */
-        printf("          0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F\n");
+        switch (fmt->render_as) {
+            case SF_BYTES_TBL_RNDR_DEC:
+                /* 3 chars plus a space. */
+                printf("           "
+                  "0   1   2   3   4   5   6   7   8   9   "
+                  "A   B   C   D   E   F\n");
+                break;
+            case SF_BYTES_TBL_RNDR_ASC:
+                /* 1 char plus a space. */
+                printf("         "
+                  "0 1 2 3 4 5 6 7 8 9 A B C D E F\n");
+                break;
+            case SF_BYTES_TBL_RNDR_HEX:
+            default:
+                /* 2 chars plus a space. */
+                printf("          "
+                  "0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F\n");
+                break;
+        }
         printf("%08X ", fmt->start_addr - (fmt->start_addr % 16));
     }
 
@@ -62,7 +89,19 @@ sf_hex_tabulate_16(struct sf_hex_tbl_fmt *fmt, unsigned char *data,
       cur_pos = fmt->start_addr % 16;
       if (cur_pos != 0) {
           for(idx = 0; idx < cur_pos; idx++) {
-              printf("   ");
+
+              switch (fmt->render_as) {
+                  case SF_BYTES_TBL_RNDR_DEC:
+                      printf("    ");
+                      break;
+                  case SF_BYTES_TBL_RNDR_ASC:
+                      printf("  ");
+                      break;
+                  case SF_BYTES_TBL_RNDR_HEX:
+                  default:
+                      printf("   ");
+                      break;
+              }
           }
       }
     } else {
@@ -74,33 +113,47 @@ sf_hex_tabulate_16(struct sf_hex_tbl_fmt *fmt, unsigned char *data,
     cur_addr = fmt->start_addr;
     while(len) {
         /* Print the current value. */
-        printf("%02X ", data[idx++]);
+        switch (fmt->render_as) {
+            case SF_BYTES_TBL_RNDR_DEC:
+            printf("%03u ", (uint8_t)data[idx++]);
+                break;
+            case SF_BYTES_TBL_RNDR_ASC:
+                printf("%c ", isprint(data[idx++]) ? data[idx] : '.');
+                break;
+            case SF_BYTES_TBL_RNDR_HEX:
+            default:
+                printf("%02X ", data[idx++]);
+                break;
+        }
+
+        /* Increment position counters. */
         cur_pos++;
         cur_addr++;
 
         /* Wrap around to the next line if necessary. */
         if (cur_pos == 16 || cur_addr == end_addr) {
             /* Render ASCII equivalents at end of row if requested. */
-            if (fmt->show_ascii) {
+            if ((fmt->show_ascii) && !(fmt->render_as ==
+                SF_BYTES_TBL_RNDR_ASC)) {
                 if (cur_addr == end_addr) {
                     /* Handle last/single row. */
                     if (cur_addr % 16) {
                         /* PARTIAL row (< 16 values). */
                         printf("%.*s", (16 - cur_addr % 16) * 3,
                         "                                                ");
-                        sf_hex_render_ascii(&data[idx - (cur_addr % 16)],
+                        sf_bytes_rndr_ascii(&data[idx - (cur_addr % 16)],
                             cur_addr - fmt->start_addr < 16 ? idx % 16 : cur_addr % 16, '.');
                     } else {
                         /* FULL row. */
-                        sf_hex_render_ascii(&data[idx-16], 16, '.');
+                        sf_bytes_rndr_ascii(&data[idx-16], 16, '.');
                     }
                 } else if (cur_addr < fmt->start_addr + 15) {
                     /* Handle first row. */
                     printf("%.*s", fmt->start_addr % 16, "                ");
-                    sf_hex_render_ascii(data, 16 - fmt->start_addr % 16, '.');
+                    sf_bytes_rndr_ascii(data, 16 - fmt->start_addr % 16, '.');
                 } else {
                     /* Full row. */
-                    sf_hex_render_ascii(&data[idx-16], 16, '.');
+                    sf_bytes_rndr_ascii(&data[idx-16], 16, '.');
                 }
             }
 
