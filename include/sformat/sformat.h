@@ -85,13 +85,23 @@ struct sf_tbl_cfg {
  * Renders 8-bit values in a 16 column wide table, with optional address
  * labels and ASCII text equivalents.
  *
- * @param fmt   Pointer to the sf_tbl_cfg struct indicating which optional
+ * @param cfg   Pointer to the sf_tbl_cfg struct indicating which optional
  *              features should be enabled when rendering the table.
  * @param data  Pointer to the data to render.
  * @param len   Number of bytes to render.
  */
 void sf_bytes_tbl_16(struct sf_tbl_cfg *cfg, unsigned char *data,
     unsigned int len);
+
+/**
+ * Renders an mbuf chain in 16 column wide tabular format, with optional
+ * address labels and ASCII text equivalents.
+ *
+ * @param cfg   Pointer to the sf_tbl_cfg struct indicating which optional
+ *              features should be enabled when rendering the table.
+ * @param m     Pointer to the mbuf chain to render.
+ */
+void sf_mbuf_tbl_16(struct sf_tbl_cfg *cfg, struct os_mbuf *m);
 
 /** @} */ /* End of FUNC group */
 

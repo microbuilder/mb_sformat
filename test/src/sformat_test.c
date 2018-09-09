@@ -22,9 +22,10 @@
 #include "testutil/testutil.h"
 #include "sformat_test_priv.h"
 
-TEST_CASE_DECL(test_tbl_hex)
-TEST_CASE_DECL(test_tbl_dec)
-TEST_CASE_DECL(test_tbl_asc)
+TEST_CASE_DECL(test_bytes_tbl_hex)
+TEST_CASE_DECL(test_bytes_tbl_dec)
+TEST_CASE_DECL(test_bytes_tbl_asc)
+TEST_CASE_DECL(test_mbuf_tbl_hex)
 
 int
 sf_test_all(void)
@@ -35,9 +36,10 @@ sf_test_all(void)
 
 TEST_SUITE(sf_test_suite)
 {
-    test_tbl_hex();
-    test_tbl_dec();
-    test_tbl_asc();
+    test_bytes_tbl_hex();
+    test_bytes_tbl_dec();
+    test_bytes_tbl_asc();
+    test_mbuf_tbl_hex();
 }
 
 #if MYNEWT_VAL(SELFTEST)

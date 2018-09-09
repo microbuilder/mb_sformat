@@ -169,3 +169,8 @@ sf_bytes_tbl_16(struct sf_tbl_cfg *cfg, unsigned char *data, unsigned int len)
         len--;
     }
 }
+
+void sf_mbuf_tbl_16(struct sf_tbl_cfg *cfg, struct os_mbuf *m)
+{
+    sf_bytes_tbl_16(cfg, OS_MBUF_DATA(m, uint8_t *), m->om_len);
+}
