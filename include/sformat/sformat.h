@@ -97,11 +97,13 @@ void sf_bytes_tbl_16(struct sf_tbl_cfg *cfg, unsigned char *data,
  * Renders an mbuf chain in 16 column wide tabular format, with optional
  * address labels and ASCII text equivalents.
  *
- * @param cfg   Pointer to the sf_tbl_cfg struct indicating which optional
- *              features should be enabled when rendering the table.
- * @param m     Pointer to the first mbuf in the mbuf chain to render.
+ * @param cfg       Pointer to the sf_tbl_cfg struct indicating which optional
+ *                  features should be enabled when rendering the table.
+ * @param m         Pointer to the first mbuf in the mbuf chain to render.
+ * @param verbose   If true (non-zero), outputs further details about the
+ *                  mbuf chain.
  */
-void sf_mbuf_tbl_16(struct sf_tbl_cfg *cfg, struct os_mbuf *om);
+void sf_mbuf_tbl_16(struct sf_tbl_cfg *cfg, struct os_mbuf *om, bool verbose);
 
 /** @} */ /* End of FUNC group */
 

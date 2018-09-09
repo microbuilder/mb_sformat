@@ -172,7 +172,7 @@ TEST_CASE(test_mbuf_tbl_hex)
     os_mbuf_concat(m1, m2);
 
     /* Render the mbuf pool in tabular format. */
-    sf_mbuf_tbl_16(&cfg, m1);
+    sf_mbuf_tbl_16(&cfg, m1, true);
 
     /* Free the mbufs. */
     rc = os_mbuf_free_chain(m1);
