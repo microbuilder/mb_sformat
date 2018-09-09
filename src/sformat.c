@@ -175,6 +175,7 @@ void sf_mbuf_tbl_16(struct sf_tbl_cfg *cfg, struct os_mbuf *om, bool verbose)
     const struct os_mbuf *cur;
     unsigned int count;
 
+    count = 0;
     for (cur = om; cur != NULL; cur = SLIST_NEXT(cur, om_next)) {
         if (verbose) {
             /* TODO: Any other useful metadata to display here? */
