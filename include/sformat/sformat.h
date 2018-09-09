@@ -42,21 +42,21 @@ extern "C" {
  *  @{ */
 
 /** Indicates the display format used when rendering 8-bit data. */
-enum sf_bytes_tbl_rndr {
+enum sf_tbl_dspl_fmt {
     /** Render values in hexadecimal format (default). */
-    SF_BYTES_TBL_RNDR_HEX = 0,
+    SF_TABLE_DSPL_FMT_HEX = 0,
 
     /** Render values in unsigned decimal format. */
-    SF_BYTES_TBL_RNDR_DEC = 1,
+    SF_TABLE_DSPL_FMT_DEC = 1,
 
     /** Render values in ASCII format ('.' if value is out of range). */
-    SF_BYTES_TBL_RNDR_ASC = 2
+    SF_TABLE_DSPL_FMT_ASC = 2
 };
 
 /** Configurable rendering options for 8-bit tabular data. */
-struct sf_bytes_tbl_fmt {
-    /** Indicates how the data should be rendered. */
-    enum sf_bytes_tbl_rndr render_as;
+struct sf_tbl_cfg {
+    /** Indicates the display format for the data. */
+    enum sf_tbl_dspl_fmt format;
 
     /** Whether or not to render ASCII equivalents in a right-hand column. */
     bool show_ascii;
@@ -85,15 +85,15 @@ struct sf_bytes_tbl_fmt {
  * Renders 8-bit values in a 16 column wide table, with optional address
  * labels and ASCII text equivalents.
  *
- * @param fmt   Pointer to the sf_hex_tbl_fmt struct indicating which optional
+ * @param fmt   Pointer to the sf_tbl_cfg struct indicating which optional
  *              features should be enabled when rendering the table.
  * @param data  Pointer to the data to render.
  * @param len   Number of bytes to render.
  */
-void sf_bytes_tbl_16(struct sf_bytes_tbl_fmt *fmt, unsigned char *data,
+void sf_bytes_tbl_16(struct sf_tbl_cfg *cfg, unsigned char *data,
     unsigned int len);
 
-/** @} */ /* End of COLOR_MATH group */
+/** @} */ /* End of FUNC group */
 
 #ifdef __cplusplus
 }

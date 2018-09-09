@@ -34,14 +34,14 @@ f_is_equal(float a, float b, float epsilon)
 TEST_CASE(test_tbl_hex)
 {
     int i;
-    struct sf_bytes_tbl_fmt fmt;
+    struct sf_tbl_cfg cfg;
     uint8_t test_data[256];
 
-    memset(&fmt, 0, sizeof fmt);
-    fmt.render_as = SF_BYTES_TBL_RNDR_HEX;
-    fmt.show_ascii = true;
-    fmt.show_addr = true;
-    fmt.start_addr = 0x20004000;
+    memset(&cfg, 0, sizeof cfg);
+    cfg.format = SF_TABLE_DSPL_FMT_HEX;
+    cfg.show_ascii = true;
+    cfg.show_addr = true;
+    cfg.start_addr = 0x20004000;
 
     /* Populate test_data. */
     for (i=0; i<256; i++) {
@@ -49,7 +49,7 @@ TEST_CASE(test_tbl_hex)
     };
 
     /* Render the first 64 bytes of flash memory. */
-    sf_bytes_tbl_16(&fmt, &test_data[48], 80);
+    sf_bytes_tbl_16(&cfg, &test_data[48], 80);
 
     /* Intentionally fail to see results for now. */
     TEST_ASSERT(f_is_equal(1.0f, 1.1f, 1E-5F));
@@ -58,14 +58,14 @@ TEST_CASE(test_tbl_hex)
 TEST_CASE(test_tbl_dec)
 {
     int i;
-    struct sf_bytes_tbl_fmt fmt;
+    struct sf_tbl_cfg cfg;
     uint8_t test_data[256];
 
-    memset(&fmt, 0, sizeof fmt);
-    fmt.render_as = SF_BYTES_TBL_RNDR_DEC;
-    fmt.show_ascii = true;
-    fmt.show_addr = true;
-    fmt.start_addr = 0x20004000;
+    memset(&cfg, 0, sizeof cfg);
+    cfg.format = SF_TABLE_DSPL_FMT_DEC;
+    cfg.show_ascii = true;
+    cfg.show_addr = true;
+    cfg.start_addr = 0x20004000;
 
     /* Populate test_data. */
     for (i=0; i<256; i++) {
@@ -73,7 +73,7 @@ TEST_CASE(test_tbl_dec)
     };
 
     /* Render the first 64 bytes of flash memory. */
-    sf_bytes_tbl_16(&fmt, &test_data[48], 80);
+    sf_bytes_tbl_16(&cfg, &test_data[48], 80);
 
     /* Intentionally fail to see results for now. */
     TEST_ASSERT(f_is_equal(1.0f, 1.1f, 1E-5F));
@@ -82,14 +82,14 @@ TEST_CASE(test_tbl_dec)
 TEST_CASE(test_tbl_asc)
 {
     int i;
-    struct sf_bytes_tbl_fmt fmt;
+    struct sf_tbl_cfg cfg;
     uint8_t test_data[256];
 
-    memset(&fmt, 0, sizeof fmt);
-    fmt.render_as = SF_BYTES_TBL_RNDR_ASC;
-    fmt.show_ascii = true;
-    fmt.show_addr = true;
-    fmt.start_addr = 0x20004000;
+    memset(&cfg, 0, sizeof cfg);
+    cfg.format = SF_TABLE_DSPL_FMT_ASC;
+    cfg.show_ascii = true;
+    cfg.show_addr = true;
+    cfg.start_addr = 0x20004000;
 
     /* Populate test_data. */
     for (i=0; i<256; i++) {
@@ -97,7 +97,7 @@ TEST_CASE(test_tbl_asc)
     };
 
     /* Render the first 64 bytes of flash memory. */
-    sf_bytes_tbl_16(&fmt, &test_data[48], 80);
+    sf_bytes_tbl_16(&cfg, &test_data[48], 80);
 
     /* Intentionally fail to see results for now. */
     TEST_ASSERT(f_is_equal(1.0f, 1.1f, 1E-5F));
