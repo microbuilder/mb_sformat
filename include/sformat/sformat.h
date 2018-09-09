@@ -16,6 +16,13 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+ /**
+  * \defgroup SFORMAT String Formatter
+  *
+  * Helper functions to render 8-bit data in human-readable format.
+  */
+
 #ifndef _MB_SFORMAT_H_
 #define _MB_SFORMAT_H_
 
@@ -25,6 +32,14 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @addtogroup STRUCTS Structs and Enums
+ *
+ * Common rendering-related structs and enums.
+ *
+ * \ingroup SFORMAT
+ *  @{ */
 
 /** Indicates the display format used when rendering 8-bit data. */
 enum sf_bytes_tbl_rndr {
@@ -56,20 +71,34 @@ struct sf_bytes_tbl_fmt {
     unsigned int start_addr;
 } __attribute__((packed));
 
+/** @} */ /* End of STRUCTS group */
+
+/**
+ * @addtogroup FUNC Functions
+ *
+ * Helper functions to render 8-bit data.
+ *
+ * \ingroup SFORMAT
+ *  @{ */
+
 /**
  * Renders 8-bit values in a 16 column wide table, with optional address
  * labels and ASCII text equivalents.
  *
- * @param Pointer to the sf_hex_tbl_fmt struct indicating which optional
- *        features should be enabled when rendering the table.
- * @param Pointer to the data to render.
- * @param Number of bytes to render.
+ * @param fmt   Pointer to the sf_hex_tbl_fmt struct indicating which optional
+ *              features should be enabled when rendering the table.
+ * @param data  Pointer to the data to render.
+ * @param len   Number of bytes to render.
  */
 void sf_bytes_tbl_16(struct sf_bytes_tbl_fmt *fmt, unsigned char *data,
     unsigned int len);
+
+/** @} */ /* End of COLOR_MATH group */
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* _MB_SFORMAT_H_ */
+
+/** @} */ /* End of colorimetry group */
