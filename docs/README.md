@@ -47,10 +47,11 @@ project on Github.
 #### Settings
 
 ```
-fmt.render_as = SF_BYTES_TBL_RNDR_HEX;
-fmt.show_ascii = true;
-fmt.show_addr = true;
-fmt.start_addr = 0x20004000;
+struct sf_tbl_cfg cfg;
+cfg.format = SF_TABLE_DSPL_FMT_HEX;
+cfg.show_ascii = true;
+cfg.show_addr = true;
+cfg.start_addr = 0x20004000;
 ```
 
 #### Output
@@ -69,10 +70,11 @@ fmt.start_addr = 0x20004000;
 #### Settings
 
 ```
-fmt.render_as = SF_BYTES_TBL_RNDR_DEC;
-fmt.show_ascii = true;
-fmt.show_addr = true;
-fmt.start_addr = 0x20004000;
+struct sf_tbl_cfg cfg;
+cfg.format = SF_TABLE_DSPL_FMT_DEC;
+cfg.show_ascii = true;
+cfg.show_addr = true;
+cfg.start_addr = 0x20004000;
 ```
 
 > NOTE: Rendering decimal values in combination with the ASCII equivalents
@@ -94,14 +96,15 @@ fmt.start_addr = 0x20004000;
 #### Settings
 
 ```
-fmt.render_as = SF_BYTES_TBL_RNDR_ASC;
-fmt.show_ascii = true;
-fmt.show_addr = true;
-fmt.start_addr = 0x20004000;
+struct sf_tbl_cfg cfg;
+cfg.format = SF_TABLE_DSPL_FMT_ASC;
+cfg.show_ascii = true;
+cfg.show_addr = true;
+cfg.start_addr = 0x20004000;
 ```
 
 > NOTE: The `show_addr` field will be ignored in this case since it has
-  no added-value compared to other `render_as` settings.
+  no added-value compared to other `format` settings.
 
 #### Output
 
