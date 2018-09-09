@@ -145,13 +145,13 @@ TEST_CASE(test_mbuf_tbl_hex)
     cfg.format = SF_TABLE_DSPL_FMT_HEX;
     cfg.show_ascii = true;
     cfg.show_addr = true;
-    cfg.start_addr = 0x20004000;
+    cfg.start_addr = 0x20004030;
 
     m = os_mbuf_get(&sf_mbuf_pool, 0);
     TEST_ASSERT_FATAL(m != NULL, "Error allocating mbuf");
 
     /* Append 128 bytes of test data. */
-    rc = os_mbuf_append(m, sf_mbuf_test_data, 128);
+    rc = os_mbuf_append(m, sf_mbuf_test_data+0x30, 128);
     TEST_ASSERT_FATAL(rc == 0, "Cannot add %d bytes to mbuf", 128);
 
     /* Render the mbuf data in tabular format. */
