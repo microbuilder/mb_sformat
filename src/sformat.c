@@ -184,6 +184,5 @@ void sf_mbuf_tbl_16(struct sf_tbl_cfg *cfg, struct os_mbuf *om, bool verbose)
         /* Update the address to use the mbuf values. */
         cfg->start_addr = (unsigned int)&cur->om_data;
         sf_bytes_tbl_16(cfg, OS_MBUF_DATA(cur, uint8_t *), cur->om_len);
-        /* Offset the starting address an appropriate number of bytes. */
     }
 }
