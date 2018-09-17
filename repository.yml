@@ -27,11 +27,3 @@ repo.newt_compatibility:
     # present.
     0.0.0:
         0.0.0: good
-
-repo.deps:
-    mb_colorimetry:
-        type: github
-        user: microbuilder
-        repo: mb_sformat
-        vers:
-            master: 0.0.0
