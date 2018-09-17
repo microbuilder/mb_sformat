@@ -1,4 +1,7 @@
-# String Format Package for Mynewt
+String Format Package for Mynewt
+================================
+
+[![Coverity Scan Build Status](https://scan.coverity.com/projects/16751/badge.svg)](https://scan.coverity.com/projects/microbuilder-mb_sformat)
 
 > **NOTE**: This package was developed using Apache Mynewt release 1.4.1.
 
