@@ -1,6 +1,6 @@
 # String Format Package for Mynewt
 
-> **NOTE**: This package developed against Apache Mynewt release 1.4.1.
+> **NOTE**: This package was developed using Apache Mynewt release 1.4.1.
 
 This package allows you to display **binary data** or **`os_mbuf` chains** in
 well-formatted tables, and can help with debugging or data analysis.
