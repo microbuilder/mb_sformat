@@ -1,5 +1,7 @@
 # String Format Package for Mynewt
 
+> **NOTE**: This package developed against Apache Mynewt release 1.4.1.
+
 This package allows you to display **binary data** or **`os_mbuf` chains** in
 well-formatted tables, and can help with debugging or data analysis.
 
@@ -66,7 +68,7 @@ sf_bytes_tbl_16(&cfg, &test_data[48], 80);
 would generate the following output:
 
 ```
-0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
+         0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
 20004000 30 31 32 33 34 35 36 37 38 39 3A 3B 3C 3D 3E 3F 0123456789:;<=>?
 20004010 40 41 42 43 44 45 46 47 48 49 4A 4B 4C 4D 4E 4F @ABCDEFGHIJKLMNO
 20004020 50 51 52 53 54 55 56 57 58 59 5A 5B 5C 5D 5E 5F PQRSTUVWXYZ[\]^_
@@ -74,15 +76,16 @@ would generate the following output:
 20004040 70 71 72 73 74 75 76 77 78 79 7A 7B 7C 7D 7E 7F pqrstuvwxyz{|}~.
 ```
 
-## Structure
+## Package Structure
 
 - **Unit tests** are provided in the `test` folder, which can also
 serve as an example of how the various functions and structs in this package
 can be used.
 
-- Reasonably complete **documentation** is available in the `docs` folder.
+- Reasonably complete **documentation** is available in the `docs` folder. The
+doxygen style documentation can be built via `doxygen Doxyfile`.
 
-## Note on unit tests
+### Note on unit tests
 
 For the moment, unit tests in this package **intentionally** fail. They are
 used to test the output of the functions during local development since
