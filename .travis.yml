@@ -56,7 +56,6 @@ script:
  project.repositories:
      - apache-mynewt-core
      - apache-mynewt-nimble
-     - mb_sformat
 
  repository.apache-mynewt-core:
      type: github
@@ -69,18 +68,11 @@ script:
      vers: 0.0.0
      user: apache
      repo: mynewt-nimble
-
- repository.mb_sformat:
-     type: github
-     vers: 0.0.0
-     user: microbuilder
-     repo: mb_sformat
  EOT
 - cp -R $HOME/ci/mynewt-nimble-targets targets
 - mkdir -p repos && cd repos/
 - git clone https://github.com/apache/mynewt-core apache-mynewt-core
 - git clone https://github.com/apache/mynewt-nimble apache-mynewt-nimble
-- git clone https://github.com/microbuilder/mb_sformat mb_sformat
 - cd ..
 - newt test @mb_sformat/sformat
 
