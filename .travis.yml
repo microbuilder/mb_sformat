@@ -74,6 +74,7 @@ script:
 - git clone https://github.com/apache/mynewt-core apache-mynewt-core
 - git clone https://github.com/apache/mynewt-nimble apache-mynewt-nimble
 - cd ..
+- apt-get --reinstall install libc6 libc6-dev
 - newt test sformat/test
 
 cache:
