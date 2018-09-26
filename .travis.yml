@@ -74,13 +74,13 @@ script:
  project.name: "apache-mynewt-core"
 
  project.repositories:
-     - mb_sformat
+     - apache-mynewt-core
 
- repository.mb_sformat:
+ repository.apache-mynewt-core:
      type: github
      vers: 0.0.0
-     user: microbuilder
-     repo: mb_sformat
+     user: apache
+     repo: mynewt-core
  EOT
 - cp -R $HOME/ci/mynewt-nimble-targets targets
 - mkdir -p repos && cd repos/
