@@ -70,7 +70,7 @@ install:
 
 script:
 - |
- cat <<EOT >> $HOME/ci/project.yml
+ cat <<EOT >> project.yml
  project.name: "apache-mynewt-core"
 
  project.repositories:
