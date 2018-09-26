@@ -69,23 +69,11 @@ install:
 - arm-none-eabi-gcc --version
 
 script:
-- cat <<EOT >> $HOME/ci/project.yml
-- project.name: "apache-mynewt-core"
--
-- project.repositories:
--     - mb_sformat
--
-- repository.mb_sformat:
--     type: github
--     vers: 0.0.0
--     user: microbuilder
--     repo: mb_sformat
-- EOT 
+- printf "project.name: \"apache-mynewt-core\"\n\nproject.repositories:\n\t- mb_sformat\n\nrepository.mb_sformat:\n\ttype: github\n\tvers: 0.0.0\n\tuser: microbuilder\n\trepo: mb_sformat" > $HOME/ci/project.yml
 - cp -R $HOME/ci/mynewt-nimble-targets targets
 - mkdir -p repos && cd repos/
 - git clone https://github.com/apache/mynewt-core apache-mynewt-core
 - cd ..
-
 - $HOME/ci/run_test.sh
 
 cache:
