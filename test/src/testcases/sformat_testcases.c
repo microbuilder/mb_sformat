@@ -81,8 +81,8 @@ TEST_CASE(test_bytes_tbl_hex)
     /* Render the first 64 bytes of flash memory. */
     sf_bytes_tbl_16(&cfg, &test_data[48], 80);
 
-    /* Intentionally fail to see results for now. */
-    TEST_ASSERT(f_is_equal(1.0f, 1.1f, 1E-5F));
+    /* Optionally intentionally fail to see results for now. */
+    TEST_ASSERT(f_is_equal(1.0f, 1.0f, 1E-5F));
 }
 
 TEST_CASE(test_bytes_tbl_dec)
@@ -105,8 +105,8 @@ TEST_CASE(test_bytes_tbl_dec)
     /* Render the first 64 bytes of flash memory. */
     sf_bytes_tbl_16(&cfg, &test_data[48], 80);
 
-    /* Intentionally fail to see results for now. */
-    TEST_ASSERT(f_is_equal(1.0f, 1.1f, 1E-5F));
+    /* Optionally intentionally fail to see results for now. */
+    TEST_ASSERT(f_is_equal(1.0f, 1.0f, 1E-5F));
 }
 
 TEST_CASE(test_bytes_tbl_asc)
@@ -129,8 +129,8 @@ TEST_CASE(test_bytes_tbl_asc)
     /* Render the first 64 bytes of flash memory. */
     sf_bytes_tbl_16(&cfg, &test_data[48], 80);
 
-    /* Intentionally fail to see results for now. */
-    TEST_ASSERT(f_is_equal(1.0f, 1.1f, 1E-5F));
+    /* Optionally intentionally fail to see results for now. */
+    TEST_ASSERT(f_is_equal(1.0f, 1.0f, 1E-5F));
 }
 
 TEST_CASE(test_mbuf_tbl_hex)
@@ -178,6 +178,6 @@ TEST_CASE(test_mbuf_tbl_hex)
     rc = os_mbuf_free_chain(m1);
     TEST_ASSERT_FATAL(rc == 0, "Error free'ing mbuf chain %d", rc);
 
-    /* Intentionally fail to see results for now. */
-    TEST_ASSERT(f_is_equal(1.0f, 1.1f, 1E-5F));
+    /* Optionally intentionally fail to see results for now. */
+    TEST_ASSERT(f_is_equal(1.0f, 1.0f, 1E-5F));
 }
