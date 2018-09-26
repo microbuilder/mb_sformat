@@ -74,7 +74,7 @@ script:
 - git clone https://github.com/apache/mynewt-core apache-mynewt-core
 - git clone https://github.com/apache/mynewt-nimble apache-mynewt-nimble
 - cd ..
-- newt test all -e @apache-mynewt-core,@apache-mynewt-nimble
+- newt test @mb_sformat/sformat/test
 
 cache:
   directories:
