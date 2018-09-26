@@ -38,10 +38,6 @@ matrix:
       addons: *addon_conf
       env:
         - TEST=TEST_ALL
-    - os: linux
-      addons: *addon_conf
-      env:
-        - TEST=BUILD_PORTS
     - os: osx
       osx_image: xcode9.2
       env:
@@ -50,10 +46,6 @@ matrix:
       osx_image: xcode9.2
       env:
         - TEST=TEST_ALL
-    - os: osx
-      osx_image: xcode9.2
-      env:
-        - TEST=BUILD_PORTS
 
 install:
 - printenv
@@ -71,20 +63,28 @@ install:
 script:
 - |
  cat <<EOT >> project.yml
- project.name: "apache-mynewt-core"
+ project.name: "microbuilder-sformat-ci"
 
  project.repositories:
      - apache-mynewt-core
+     - mb_sformat
 
  repository.apache-mynewt-core:
      type: github
      vers: 0.0.0
      user: apache
      repo: mynewt-core
+
+ repository.mb_sformat:
+     type: github
+     vers: 0.0.0
+     user: microbuilder
+     repo: mb_sformat
  EOT
 - cp -R $HOME/ci/mynewt-nimble-targets targets
 - mkdir -p repos && cd repos/
 - git clone https://github.com/apache/mynewt-core apache-mynewt-core
+- git clone https://github.com/microbuilder/mb_sformat mb_sformat
 - cd ..
 
 - $HOME/ci/run_test.sh
