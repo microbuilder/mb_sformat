@@ -17,20 +17,19 @@
 
 language: go
 
-_addons: &addon_conf
+addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
     packages:
       - gcc-multilib
       - gcc-7-multilib
-#      - libc6-dev-i386
 
 go:
   - "1.10"
 
-os: osx
-osx_image: xcode9.2
+#os: osx
+#osx_image: xcode9.2
 
 install:
 - printenv
