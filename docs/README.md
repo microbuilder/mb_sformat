@@ -13,7 +13,8 @@ It supports rendering 8-bit data in the following formats:
 For both hexadecimal and decimal out, ASCII equivalents can also be rendered
 alongside the raw numeric data for improved human readability.
 
-This package is designed to work with the [Apache Mynewt](https://mynewt.apache.org/) operating system, and was
+This package is designed to work with the
+[Apache Mynewt](https://mynewt.apache.org/) operating system, and was
 written using version 1.4.1.
 
 ## Dependencies
@@ -33,12 +34,6 @@ The easiest way to make use of this package is to add it as a project
 dependency. This will pull the latest version of the library from Github:
 
     $ newt TODO
-
-## Development Status
-
-See the dedicated ToDos page for details, or check the [issue
-tracking](https://github.com/microbuilder/mb_colorimetry/issues) for the
-project on Github.
 
 ## Sample Output
 

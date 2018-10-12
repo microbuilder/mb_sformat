@@ -141,7 +141,8 @@ sf_bytes_tbl_16(struct sf_tbl_cfg *cfg, unsigned char *data, unsigned int len)
                         printf("%.*s", (16 - cur_addr % 16) * 3,
                         "                                                ");
                         sf_bytes_rndr_ascii(&data[idx - (cur_addr % 16)],
-                            cur_addr - cfg->start_addr < 16 ? idx % 16 : cur_addr % 16, '.');
+                            cur_addr - cfg->start_addr < 16 ? idx % 16 :
+                            cur_addr % 16, '.');
                     } else {
                         /* FULL row. */
                         sf_bytes_rndr_ascii(&data[idx-16], 16, '.');
