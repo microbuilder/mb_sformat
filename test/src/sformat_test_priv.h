@@ -29,7 +29,7 @@
 extern "C" {
 #endif
 
-int sf_test_suite(void);
+TEST_SUITE_DECL(sf_test_suite);
 
 #ifdef __cplusplus
 }
